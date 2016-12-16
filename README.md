@@ -121,3 +121,12 @@ Donations
 Donations are **greatly appreciated!**
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "AdminLTE Presentation")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=629XCUSXBHCBC "Donate")
+
+Modified By
+-------------
+[Reza Pahlevi](https://github.com/RezaPahleviBahruddin/)
+[Sri Bulan Megawati](https://github.com/sribulanmegawati)
+
+Used For
+-------------
+Test Magang UBig, used AdminLTE 2 Template
