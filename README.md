@@ -124,8 +124,9 @@ Donations are **greatly appreciated!**
 
 Modified By
 -------------
-[Reza Pahlevi](https://github.com/RezaPahleviBahruddin/)
-[Sri Bulan Megawati](https://github.com/sribulanmegawati)
+[Reza Pahlevi Bahruddin](https://github.com/RezaPahleviBahruddin/)
+
+[Sri Bulan Megawati](https://github.com/sribulanmegawati/)
 
 Used For
 -------------
