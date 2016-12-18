@@ -10,20 +10,16 @@
 		function __construct()
 		{
 			$database = new Database();
+			$db = $database->db_connection();
+			$this->con = $db;
 		}
 
-		public function runQuery($sql)
-		{
-			$stmt = $this->con->prepare($sql);
-			return $stmt;
-		}
-
-		public function resgister_user($name, $email, $password)
+		public function register_user($name, $email, $password)
 		{
 			try {
 				$new_password = password_hash($password, PASSWORD_DEFAULT);
 				$sql = "INSERT INTO USERS (USERNAME, PASSOWRD, EMAIL) VALUES (:uname, :mail, :pass)";
-				$stmt = $this->runQuery($sql);
+				$stmt = $this->con->prepare($sql);
 
 				$stmt->bindparam(":uname", $name);
 				$stmt->bindparam(":mail", $email);
@@ -37,15 +33,21 @@
 			}
 		}
 
+		public function run_query($sql)
+		{
+			$stmt = $this->con->prepare($sql);
+			return $stmt;
+		}
+
 		public function do_login($uname, $mail, $pass)
 		{
 			try {
 				$sql = "SELECT USER_ID, USERNAME, PASSWORD FROM USERS WHERE USERNAME=:uname OR EMAIL=:email";
-				$stmt = $this->runQuery($sql);
-				$stmt->execute(array(':uname' => $uname, ':email' => $email));
-				$user_row = $stmt->fetch(FETCH_ASSOC);
-				if ($stmt->rowCount()>1) {
-					if (password_verify($pass, $user_row['PASSOWRD'])) {
+				$stmt = $this->con->prepare($sql);
+				$stmt->execute(array(':uname' => $uname, ':email' => $mail));
+				$user_row = $stmt->fetch(PDO::FETCH_ASSOC);
+				if ($stmt->rowCount() == 1) {
+					if (password_verify($pass, $user_row['PASSWORD'])) {
 						$_SESSION['user_session'] = $user_row['USER_ID'];
 						return true;
 					}else

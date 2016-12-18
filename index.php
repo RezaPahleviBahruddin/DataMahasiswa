@@ -1,3 +1,28 @@
+<?php  
+  session_start();
+  
+  require_once 'class.user.php';
+  $login = new User();
+
+  if ($login->is_logged_in() != "") 
+    $login->redirect('home.php');
+
+  if (isset($_POST['btn_login'])) {
+    $uname = strip_tags($_POST['username_email']);
+    $mail = strip_tags($_POST['username_email']);
+    $password = strip_tags($_POST['password']);
+
+    echo "Name: ".$uname;
+    echo "Mail: ".$mail;
+    echo "Password: ".$password;
+
+    if ($login->do_login($uname, $mail, $password)) 
+      $login->redirect('home.php');
+    else
+      $error = "Login Gagal";
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,17 +54,34 @@
   <div class="login-logo">
     <a href="index.php"><b>Data</b> Mahasiswa</a>
   </div>
+  <div class="row">
+  <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <div id="error">
+          <?php  
+            if (isset($error)) {
+              ?>
+              <div class="alert alert-danger">
+                <i class="glyphicon glyphicon-warning-sign"></i>
+                &nbsp; <?= $error; ?>
+              </div>
+              <?php
+            }
+          ?>
+      </div>
+    </div>
+  </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in</p>
 
-    <form action="index.html" method="post">
+    <form action="index.php" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Username">
+        <input name="username_email" type="text" class="form-control" placeholder="Username / Email">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input name="password" type="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -47,7 +89,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" name="btn_login" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
