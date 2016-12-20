@@ -30,6 +30,7 @@ if( !empty($requestData['search']['value']) ) {
 	$sql.=" OR TGL_LAHIR LIKE '%".$requestData['search']['value']."%' ";
 	$sql.=" OR JENIS_KELAMIN LIKE '%".$requestData['search']['value']."%' ";
     $sql.=" OR ALAMAT LIKE '%".$requestData['search']['value']."%' ";
+    $sql.=" OR JURUSAN LIKE '%".$requestData['search']['value']."%' ";
 	$query=mysqli_query($conn, $sql) or die("ajax_lists.php: get PO");
 	$totalFiltered = mysqli_num_rows($query); 
 
@@ -38,7 +39,7 @@ if( !empty($requestData['search']['value']) ) {
 	
 } else {	
 
-	$sql = "SELECT NIS, NAMA, TGL_LAHIR, JENIS_KELAMIN, ALAMAT";
+	$sql = "SELECT NIS, NAMA, TGL_LAHIR, JENIS_KELAMIN, ALAMAT, JURUSAN";
 	$sql.=" FROM MAHASISWA";
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 	$query=mysqli_query($conn, $sql) or die("ajax_lists.php: get PO");
@@ -54,9 +55,10 @@ while( $row=mysqli_fetch_array($query) ) {
 	$nestedData[] = $row["TGL_LAHIR"];
 	$nestedData[] = $row["JENIS_KELAMIN"];
     $nestedData[] = $row["ALAMAT"];
+    $nestedData[] = $row["JURUSAN"];
     $nestedData[] = '<td><center>
                      <a href="edit.php?kd='.$row['NIS'].'"  data-toggle="tooltip" title="Edit" class="glyphicon glyphicon-edit"> <i class="menu-icon icon-pencil"></i> </a>
-                     <a href="index.php?hal=hapus&kd='.$row['NIS'].'"  data-toggle="tooltip" title="Hapus" class="glyphicon glyphicon-remove"> <i class="menu-icon icon-trash"></i> </a>
+                     <a href="home.php?hal=hapus&kd='.$row['NIS'].'"  data-toggle="tooltip" title="Hapus" class="glyphicon glyphicon-remove"> <i class="menu-icon icon-trash"></i> </a>
 				     </center></td>';		
 	
 	$data[] = $nestedData;

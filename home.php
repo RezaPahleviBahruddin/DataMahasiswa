@@ -142,6 +142,7 @@
                   <th>TANGGAL LAHIR</th>
                   <th>JENIS KELAMIN</th>
                   <th>ALAMAT</th>
+                  <th>JURUSAN</th>
                   <th>AKSI</th>
                 </tr>
                 </thead>
@@ -154,6 +155,7 @@
                   <th>TANGGAL LAHIR</th>
                   <th>JENIS KELAMIN</th>
                   <th>ALAMAT</th>
+                  <th>JURUSAN</th>
                   <th>AKSI</th>
                 </tr>
                 </tfoot>
